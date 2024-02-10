@@ -14,7 +14,6 @@ function HomePage() {
                         @bhaskar_aa45
                     </h6>
                 </div>
-                <spacer
                 <div className="connect-btn-container">
                     <button className="connect-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
