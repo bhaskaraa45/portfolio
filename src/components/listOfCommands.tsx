@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CommandInput from "./commandInput.tsx";
 import CommandResult from "./resultCommands.tsx";
 import CommandNotFound from "./commandNotExists.tsx";
+import HelpCommandResult from "./helpCommand.tsx";
 
 function ListOfCommands() {
     const [inputText, setInputText] = useState('');
@@ -47,7 +48,7 @@ function ListOfCommands() {
         if (avlblCommands.includes(arr[0])) {
             switch (arr[0]) {
                 case "help":
-
+                    handleHelpCommand();
                     break;
                 case "clear":
                     setCommands([])
@@ -71,7 +72,13 @@ function ListOfCommands() {
     };
 
     const handleHelpCommand = () => {
-        // Implement help command logic if needed
+        setCommands(prevCommands => [
+            ...prevCommands,
+            <CommandResult
+                CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={"help"} />}
+                Result={<HelpCommandResult />}
+            />
+        ]);
     };
 
     useEffect(() => {

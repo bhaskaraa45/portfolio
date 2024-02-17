@@ -64,6 +64,19 @@ html, body {
 .hide{
     display: none;
 }
+
+.helpResult{
+    color: whitesmoke;
+    font-size: 19px;
+    font-weight: 500;
+
+}
+
+.helpCommands{
+    color: #a3f0ff;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 950px) {
     .terminal {
         height: 75vh;
