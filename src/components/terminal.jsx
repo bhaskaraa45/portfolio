@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import '../styles/terminal.css';
+import CommandInput from './commandInput.tsx';
+import ListOfCommands from './listOfCommands.tsx'
 
-function Terminal(params) {
+function Terminal() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [inputText, setInputText] = useState('');
 
@@ -17,26 +19,51 @@ function Terminal(params) {
         };
     }, []);
 
-    const inputStyle = {
-        backgroundColor: 'transparent',
-        border: 'none',
-        color: '#fff',
-        outline: 'none', 
-        fontFamily: 'Kode Mono, monospace',
-        fontSize: '18px',
-        fontWeight: '500',
-    };
+    // const inputStyle = {
+    //     backgroundColor: 'transparent',
+    //     border: 'none',
+    //     color: '#fff',
+    //     outline: 'none',
+    //     fontFamily: 'Kode Mono, monospace',
+    //     fontSize: '18px',
+    //     fontWeight: '500',
+    // };
 
-    const handleInputChange = (event) => {
-        setInputText(event.target.value);
-    };
+    // const handleInputChange = (event) => {
+    //     setInputText(event.target.value);
+    // };
 
-    const handleInputSubmit = (event) => {
-        if (event.key === 'Enter') {
-            console.log(inputText);
-            setInputText('');
-        }
-    };
+    // const handleInputSubmit = (event) => {
+    //     if (event.key === 'Enter') {
+    //         // console.log(inputText);
+    //         handleCommand(inputText);
+    //         setInputText('');
+    //     }
+    // };
+
+    // const avlblCommands = ["help", "cd", "ls", "cat", "sudo"];
+
+    // const handleCommand = (command) => {
+    //     const arr = command.split(" ");
+    //     if (avlblCommands.includes(arr[0])) {
+    //         // console.log(arr[0]);
+    //         if (arr[0] === "help") {
+    //             handleHelpCommand();
+    //         }
+    //     } else {
+    //         console.log("Command not found");
+    //     }
+
+    //     var text = new String(command);
+
+    //     AddToTheList({ text, inputStyle })
+        
+
+    // };
+
+    // const handleHelpCommand = () => {
+
+    // };
 
     return (
         <div>
@@ -65,17 +92,16 @@ function Terminal(params) {
                     )}
                 </div>
 
-                <div className='main'>
-                    ┌──(bhaskar-aa45㉿portfolio)-[~] <br />
-                    └─$ <input 
-                            autoComplete='off' 
-                            type='text' 
-                            style={inputStyle} 
-                            value={inputText}
-                            onChange={handleInputChange}
-                            onKeyDown={handleInputSubmit} 
-                        />
-                </div>
+                <ListOfCommands />
+
+                {/* <CommandInput
+                    inputText={inputText}
+                    handleInputChange={handleInputChange}
+                    handleInputSubmit={handleInputSubmit}
+                    inputStyle={inputStyle}
+                    isDisable={false}
+                /> */}
+
             </div>
         </div>
     );
