@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommandInput from "./commandInput.tsx";
+import CommandResult from "./resultCommands.tsx";
+import CommandNotFound from "./commandNotExists.tsx";
 
 function ListOfCommands() {
     const [inputText, setInputText] = useState('');
     const [commands, setCommands] = useState<JSX.Element[]>([]);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [isClear, setClear] = useState(false);
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -26,39 +30,98 @@ function ListOfCommands() {
         }
     };
 
-    const avlblCommands = ["help", "cd", "ls", "cat", "sudo"];
+    const avlblCommands = ["help", "cd", "ls", "cat", "sudo", "clear"];
 
     const handleCommand = (command: string) => {
+        if (command.trim().length == 0) {
+            setCommands(prevCommands => [
+                ...prevCommands,
+                <CommandResult
+                    CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={command} />}
+                    Result={<div></div>}
+                />
+            ]);
+            return;
+        }
         const arr = command.split(" ");
         if (avlblCommands.includes(arr[0])) {
-            if (arr[0] === "help") {
-                handleHelpCommand();
+            switch (arr[0]) {
+                case "help":
+
+                    break;
+                case "clear":
+                    setCommands([])
+                    setClear(true);
+                    break;
+
+                default:
+                    break;
             }
+
         } else {
             console.log("Command not found");
+            setCommands(prevCommands => [
+                ...prevCommands,
+                <CommandResult
+                    CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={command} />}
+                    Result={<CommandNotFound command={command} />}
+                />
+            ]);
         }
-
-        setCommands(prevCommands => [
-            ...prevCommands,
-            <CommandInputDisable key={command} inputText={command} inputStyle={inputStyle} />
-        ]);
     };
 
     const handleHelpCommand = () => {
         // Implement help command logic if needed
     };
 
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
     return (
-        <div className="command-list">
-            {commands}
-            <CommandInput
-                inputText={inputText}
-                handleInputChange={handleInputChange}
-                handleInputSubmit={handleInputSubmit}
-                inputStyle={inputStyle}
-                isDisable={false}
-            />
-        </div>
+        <>
+            <div className="command-list">
+                <div className={isClear ? 'welcomeText hide' : 'welcomeText'} >
+                    {windowWidth > 900 ? (
+                        <p>
+                            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓<br />
+                            <br />
+                            Welcome to <i>CLI Version</i> of my Portfolio<br />
+                            Run: <i>"help"</i> to see all commands<br />
+                            <br />
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛<br />
+                        </p>
+                    ) : (
+                        <p>
+                            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓<br />
+                            <br />
+                            Welcome to <i>CLI Version</i> of my Portfolio<br />
+                            Run: <i>"help"</i> to see all commands<br />
+                            <br />
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛<br />
+                        </p>
+                    )}
+                </div>
+                {commands}
+                <CommandInput
+                    inputText={inputText}
+                    handleInputChange={handleInputChange}
+                    handleInputSubmit={handleInputSubmit}
+                    inputStyle={inputStyle}
+                    isDisable={false}
+                />
+            </div>
+        </>
+
     );
 }
 
