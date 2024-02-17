@@ -1,12 +1,14 @@
 import React from 'react';
 import '../styles/home.css';
+import SkillsComponent from '../components/skills';
+import Terminal from '../components/terminal';
 
 function HomePage() {
     return (
         <div className="homepage">
-            <div className='cover-img'>
+            {/* <div className='cover-img'>
                 <div className="cover">
-                    <img src="/images/pic.jpg" alt="profile-pic" className='profilepic' />
+                    <img src="/images/cover.jpg" alt="profile-pic" className='profilepic' />
                     <div className='header'>
                         <div className="info">
                             <div className='name'>
@@ -27,10 +29,10 @@ function HomePage() {
                     </div>
                 </div>
             </div>
-
             <div>
+            </div> */}
 
-            </div>
+            <Terminal/>
         </div>
     );
 }
