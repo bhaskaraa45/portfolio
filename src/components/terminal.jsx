@@ -7,7 +7,13 @@ function Terminal() {
     return (
         <div>
             <div className="terminal">
-                <div className="topbar"></div>
+                <div className="topbar">
+                    <div className='topbardots'>
+                        <span class="topbardot1"></span>
+                        <span class="topbardot2"></span>
+                        <span class="topbardot3"></span>
+                    </div>
+                </div>
                 <ListOfCommands />
             </div>
         </div>

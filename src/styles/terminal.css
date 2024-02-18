@@ -10,7 +10,8 @@ html, body {
 .terminal {
     height: 80vh;
     width: 55vw;
-    background-color: #415a77;
+    background-color: #1a45736c;
+    /* background-color: #415a77; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +24,41 @@ html, body {
     height: 30px;
     border-radius: 14px 14px 0px 0px;
     min-height: 30px;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+}
+
+
+.topbardots {
+    height: 30px;
+    border-radius: 14px 14px 0px 0px;
+    min-height: 30px;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.topbardot1{
+    background-color: #ff5f56;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    margin: 8px 0px 0px 24px ;
+}
+.topbardot2{
+    background-color: #ffbd2e;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    margin: 8px 8px ;
+}
+.topbardot3{
+    background-color: #27c93f;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    margin: 8px 0px ;
 }
 
 .welcomeText {
@@ -75,6 +111,19 @@ html, body {
 .helpCommands{
     color: #a3f0ff;
     font-weight: 600;
+}
+.lsCommands{
+    color: #1275ff;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.lsInstruction{
+    font-size: 18px;
+    color: whitesmoke;
+    font-style: italic;
+    font-weight: 500;
+    margin-left: 12px;
 }
 
 @media screen and (max-width: 950px) {

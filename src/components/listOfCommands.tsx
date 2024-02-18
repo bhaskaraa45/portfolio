@@ -3,6 +3,7 @@ import CommandInput from "./commandInput.tsx";
 import CommandResult from "./resultCommands.tsx";
 import CommandNotFound from "./commandNotExists.tsx";
 import HelpCommandResult from "./helpCommand.tsx";
+import LsCommandHandle from "./lsCommand.tsx";
 
 function ListOfCommands() {
     const [inputText, setInputText] = useState('');
@@ -34,7 +35,7 @@ function ListOfCommands() {
     const avlblCommands = ["help", "cd", "ls", "cat", "sudo", "clear"];
 
     const handleCommand = (command: string) => {
-        if (command.trim().length == 0) {
+        if (command.trim().length === 0) {
             setCommands(prevCommands => [
                 ...prevCommands,
                 <CommandResult
@@ -54,7 +55,9 @@ function ListOfCommands() {
                     setCommands([])
                     setClear(true);
                     break;
-
+                case "ls":
+                    handleLsCommand();
+                    break;
                 default:
                     break;
             }
@@ -80,6 +83,16 @@ function ListOfCommands() {
             />
         ]);
     };
+
+    const handleLsCommand = () => {
+        setCommands(prevCommands => [
+            ...prevCommands,
+            <CommandResult
+                CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={"ls"} />}
+                Result={<LsCommandHandle />}
+            />
+        ]);
+    }
 
     useEffect(() => {
         function handleResize() {
