@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import '../styles/terminal.css';
-import CommandInput from './commandInput.tsx';
+// import CommandInput from './commandInput.tsx';
 import ListOfCommands from './listOfCommands.tsx'
 
 function Terminal() {

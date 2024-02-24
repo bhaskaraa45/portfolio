@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/home.css';
-import SkillsComponent from '../components/skills';
+// import SkillsComponent from '../components/skills';
 import Terminal from '../components/terminal';
 
 function HomePage() {
