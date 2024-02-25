@@ -4,6 +4,8 @@ import CommandResult from "./resultCommands.tsx";
 import CommandNotFound from "./commandNotExists.tsx";
 import HelpCommandResult from "./helpCommand.tsx";
 import LsCommandHandle from "./lsCommand.tsx";
+import CatFileNotFound, { NoFileMentioned } from "./catFileNotFound.tsx";
+import AboutCommandResult from "./aboutCommand.tsx";
 
 function ListOfCommands() {
     const [inputText, setInputText] = useState('');
@@ -33,6 +35,9 @@ function ListOfCommands() {
     };
 
     const avlblCommands = ["help", "cd", "ls", "cat", "sudo", "clear"];
+    const content = [
+        "about", "contact", "education", "experience", "projects", "resume"
+    ];
 
     const handleCommand = (command: string) => {
         if (command.trim().length === 0) {
@@ -58,6 +63,9 @@ function ListOfCommands() {
                 case "ls":
                     handleLsCommand();
                     break;
+                case "cat":
+                    handleCatCommand(command);
+                    break;
                 default:
                     break;
             }
@@ -73,6 +81,45 @@ function ListOfCommands() {
             ]);
         }
     };
+
+    const handleCatCommand = (cmd: string) => {
+        const arr = cmd.split(" ");
+        if (arr.length === 1) {
+            setCommands(prevCommands => [
+                ...prevCommands,
+                <CommandResult
+                    CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={"cat"} />}
+                    Result={<NoFileMentioned />}
+                />
+            ]);
+        } else if (arr[1].length === 0) {
+            setCommands(prevCommands => [
+                ...prevCommands,
+                <CommandResult
+                    CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={"cat"} />}
+                    Result={<NoFileMentioned />}
+                />
+            ]);
+        } else {
+            if (!content.includes(arr[1])) {
+                setCommands(prevCommands => [
+                    ...prevCommands,
+                    <CommandResult
+                        CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
+                        Result={<CatFileNotFound fileName= {arr[1]} />}
+                    />
+                ]);
+            }else{
+                setCommands(prevCommands => [
+                    ...prevCommands,
+                    <CommandResult
+                        CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
+                        Result={<AboutCommandResult />}
+                    />
+                ]);
+            }
+        }
+    }
 
     const handleHelpCommand = () => {
         setCommands(prevCommands => [
