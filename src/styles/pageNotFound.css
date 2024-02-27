@@ -1,0 +1,9 @@
+.pageNotExists{
+    color: whitesmoke;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-style: italic;
+}
