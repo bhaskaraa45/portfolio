@@ -1,21 +1,29 @@
 html, body {
     height: 100%;
+    /* width: 80vw; */
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    flex-direction: row;
     /* font-family: "Courier New", Courier, monospace; Use a monospaced font */
 }
 
+
 .terminal {
     height: 80vh;
-    width: 55vw;
+    width: 65vw;
     background-color: #1a45736c;
     /* background-color: #415a77; */
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 14px;
+}
+
+.homepage{
+    display: flex;
+    justify-content: center;
 }
 
 .topbar {
@@ -96,6 +104,12 @@ html, body {
 .gap{
     margin-bottom: 4px;
 }
+.gap-homepage-down{
+    margin-bottom: 24px;
+}
+.gap-homepage-up{
+    margin-bottom: 8px;
+}
 
 .hide{
     display: none;
@@ -130,5 +144,15 @@ html, body {
     .terminal {
         height: 75vh;
         width: 95vw;
+        background-color: #1a45736c;
+        /* background-color: #415a77; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 14px;
+    }
+    .homepage{
+        display: flex;
+        justify-content: center;
     }
 }

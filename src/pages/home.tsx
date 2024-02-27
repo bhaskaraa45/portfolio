@@ -2,11 +2,16 @@ import React from 'react';
 import '../styles/home.css';
 // import SkillsComponent from '../components/skills';
 import Terminal from '../components/terminal';
+import Header from '../components/header.tsx';
 
 function HomePage() {
     return (
-        <div className="homepage">
-            {/* <div className='cover-img'>
+        <div>
+            {/* <div className='gap-homepage-up'></div> */}
+            <Header/>
+            <div className='gap-homepage-down'></div>
+            <div className="homepage">
+                {/* <div className='cover-img'>
                 <div className="cover">
                     <img src="/images/cover.jpg" alt="profile-pic" className='profilepic' />
                     <div className='header'>
@@ -32,8 +37,10 @@ function HomePage() {
             <div>
             </div> */}
 
-            <Terminal/>
+                <Terminal />
+            </div>
         </div>
+
     );
 }
 

@@ -1,0 +1,61 @@
+.header {
+    width: 100vw;
+    color: white;
+     display: flex;
+     justify-content: center;
+    /* columns: start; */
+    align-items: center;
+    /* justify-content: space-between; */
+    background: transparent;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    transition: 0.2s ease-in-out;
+    background-color: blueviolet;
+}
+
+.headerContent{
+    width: 85vw;
+    display: flex;
+    columns: start;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navList ul {
+    display: flex;
+    list-style-type: none;
+    padding: 6px;
+    /* margin: 24px;  */
+}
+
+.navList li {
+    margin: 0 10px; 
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.navList li a{
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.homePageBtn{
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.navList li a.active{
+    font-weight: 500;
+    color: #14131a;
+}
+.navList li a:hover{
+    color: #14131a;
+}
+
+
