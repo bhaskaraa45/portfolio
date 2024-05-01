@@ -12,7 +12,7 @@ function ListOfCommands() {
     const [commands, setCommands] = useState<JSX.Element[]>([]);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isClear, setClear] = useState(false);
-    const endOfCommandsRef = useRef<HTMLDivElement>(null);  
+    const endOfCommandsRef = useRef<HTMLDivElement>(null);
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -52,7 +52,7 @@ function ListOfCommands() {
             return;
         }
         const arr = command.split(" ");
-        if (avlblCommands.includes(arr[0])) {
+        if (avlblCommands.includes(arr[0]) || arr[0].startsWith("./")) {
             switch (arr[0]) {
                 case "help":
                     handleHelpCommand();
@@ -66,6 +66,9 @@ function ListOfCommands() {
                     break;
                 case "cat":
                     handleCatCommand(command);
+                    break;
+                case "./resume":
+                    handleResumeCommand("./resume");
                     break;
                 default:
                     break;
@@ -111,16 +114,36 @@ function ListOfCommands() {
                     />
                 ]);
             } else {
-                setCommands(prevCommands => [
-                    ...prevCommands,
-                    <CommandResult
-                        CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
-                        Result={<AboutCommandResult />}
-                    />
-                ]);
+
+                switch (arr[1]) {
+                    case "resume":
+                        handleResumeCommand("cat resume")
+                        break;
+                    default:
+                        break;
+                }
+
+                // setCommands(prevCommands => [
+                //     ...prevCommands,
+                //     <CommandResult
+                //         CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
+                //         Result={<AboutCommandResult />}
+                //     />
+                // ]);
             }
         }
     }
+
+    const handleResumeCommand = (cmd: string) => {
+        setCommands(prevCommands => [
+            ...prevCommands,
+            <CommandResult
+                CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
+                Result={<div></div>}
+            />
+        ]);
+        openInNewTab("https://raw.githubusercontent.com/bhaskaraa45/bhaskaraa45/main/resume.pdf")
+    };
 
     const handleHelpCommand = () => {
         setCommands(prevCommands => [
@@ -159,6 +182,11 @@ function ListOfCommands() {
             endOfCommandsRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [commands]);
+
+    function openInNewTab(url: string) {
+        var win = window.open(url, '_blank');
+        // win!.focus();
+    }
 
     return (
         <>
