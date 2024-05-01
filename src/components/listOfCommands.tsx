@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CommandInput from "./commandInput.tsx";
 import CommandResult from "./resultCommands.tsx";
 import CommandNotFound from "./commandNotExists.tsx";
@@ -12,6 +12,7 @@ function ListOfCommands() {
     const [commands, setCommands] = useState<JSX.Element[]>([]);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isClear, setClear] = useState(false);
+    const endOfCommandsRef = useRef<HTMLDivElement>(null);  
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -106,10 +107,10 @@ function ListOfCommands() {
                     ...prevCommands,
                     <CommandResult
                         CommandWidget={<CommandInputDisable inputStyle={inputStyle} inputText={cmd} />}
-                        Result={<CatFileNotFound fileName= {arr[1]} />}
+                        Result={<CatFileNotFound fileName={arr[1]} />}
                     />
                 ]);
-            }else{
+            } else {
                 setCommands(prevCommands => [
                     ...prevCommands,
                     <CommandResult
@@ -151,8 +152,13 @@ function ListOfCommands() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
 
+    }, []);
+    useEffect(() => {
+        if (endOfCommandsRef.current) {
+            endOfCommandsRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [commands]);
 
     return (
         <>
@@ -179,6 +185,7 @@ function ListOfCommands() {
                     )}
                 </div>
                 {commands}
+                <div ref={endOfCommandsRef} />
                 <CommandInput
                     inputText={inputText}
                     handleInputChange={handleInputChange}
